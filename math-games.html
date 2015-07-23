@@ -1,0 +1,47 @@
+<head>
+  <title>Number list</title>
+</head>
+ 
+<body>
+  <div class="container">
+    <header>
+      <h1>Number list ({{incompleteCount}})</h1>
+      <label class="hide-completed">
+        <input type="checkbox" checked="{{hideCompleted}}" />
+        Hide Completed Numbers
+      </label>
+ 	  {{> loginButtons}}
+ 	  {{#if currentUser}}
+	      <form class="new-number">
+	        <input type="number" name="number" placeholder="Type to add new number" />
+	      </form>
+      {{/if}}
+    </header>
+ 
+    <ul>
+      {{#each numbers}}
+        {{> number}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+ 
+<template name="number">
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <button class="delete">&times;</button>
+ 
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+    {{#if isOwner}}
+      <button class="toggle-private">
+        {{#if private}}
+          Private
+        {{else}}
+          Public
+        {{/if}}
+      </button>
+    {{/if}}
+ 
+ 
+    <span class="number"><strong>{{username}}</strong> - {{number}}</span>
+  </li>
+</template>
